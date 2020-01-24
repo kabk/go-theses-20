@@ -1,0 +1,251 @@
+@charset "UTF-8";
+/* ••••••••••••••••••••••••••••••••
+© 2019-now Nedislav Kamburov
+All rights reserved
+www.nedkamburov.com
+•••••••••••••••••••••••••••••••• */
+
+// General
+// --------------------------------
+//TODO: Before live, check how the foundry wants the type to be embedded
+// @font-face {
+// }
+@font-face {
+  font-style: normal;
+  font-weight: normal;
+  font-family: 'Font Regular';
+  src: url(../fonts/NeueHaasUnicaW1G-Regular.woff2) format('woff2'),
+    url(../fonts/NeueHaasUnicaW1G-Regular.woff) format('woff'),
+    url(../fonts/NeueHaasUnicaW1G-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Font Italic';
+  src: url(../fonts/NeueHaasUnicaW1G-Italic.woff2) format('woff2'),
+    url(../fonts/NeueHaasUnicaW1G-Italic.woff) format('woff'),
+    url(../fonts/NeueHaasUnicaW1G-Italic.ttf) format('truetype');
+}
+
+// Variables
+// --------------------------------
+$background-color: rgb(250, 250, 250);
+$color: #000;
+$link-color: blue;
+
+$font-size: 2rem;
+$line-height: 1.3;
+$font-size-title: $font-size * 2;
+$line-height-title: 1.1;
+
+$gutter-v: $font-size * $line-height * 1.4;
+$gutter-h: $font-size * $line-height * 1.5;
+$gutter-thin-h: $gutter-h * 0.5;
+$indent: $gutter-v;
+
+$duration: 0.8s;
+// $easing: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+$easing: ease-in-out;
+
+html {
+  width: 100%;
+
+  //TODO: Responsiveness
+  @media screen and (min-width: 0), (min-height: 0px) {
+    font-size: 10px;
+  }
+
+  @media screen and (min-width: 200px) and (min-height: 200px) {
+    font-size: 7px;
+  }
+
+  @media screen and (min-width: 400px) and (min-height: 400px) {
+    font-size: 9px;
+  }
+
+  @media screen and (min-width: 500px) and (min-height: 500px) {
+    font-size: 10px;
+  }
+
+  @media screen and (min-width: 800px) and (min-height: 800px) {
+    font-size: 12px;
+  }
+
+  @media screen and (min-width: 1000px) and (min-height: 1000px) {
+    font-size: 12px;
+  }
+}
+
+body {
+  width: 100%;
+
+  font-family: 'Font Regular', Helvetica, Arial, sans-serif;
+  font-size: $font-size;
+  line-height: $line-height;
+  color: $color;
+  background-color: $background-color;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:link,
+a:visited {
+  text-decoration: none;
+}
+a:hover,
+a:active {
+  text-decoration: underline;
+}
+a:focus {
+  text-decoration: none;
+}
+
+.wrapper {
+  padding: 0 $gutter-v;
+  margin: auto;
+  left: 0;
+  right: 0;
+
+  @media screen {
+    max-width: 900px;
+  }
+
+  .menu {
+    position: fixed;
+    z-index: 9999;
+
+    .chapters-list {
+      li {
+        display: inline-block;
+        margin-right: 1em; //TODO: set
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    h1 {
+      font-size: $font-size-title;
+      line-height: $line-height-title;
+    }
+  }
+
+  .container {
+    padding-top: 10em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .object {
+      position: relative;
+      height: auto;
+      // flex: 1 2 1;
+
+      perspective: 1000px;
+      transform-style: preserve-3d;
+      transition: transform $duration;
+      margin-bottom: $gutter-h;
+
+      .side {
+        // position: absolute;
+        height: 50vw;
+        width: 100%;
+        max-height: 50vh;
+        top: 0;
+        left: 0;
+        transform-style: preserve-3d;
+
+        ::-webkit-scrollbar {
+          display: none;
+        }
+
+        scrollbar-width: none;
+      }
+      .back-side {
+        transform: rotateY(180deg);
+        width: 100%;
+        backface-visibility: hidden;
+        overflow-y: scroll;
+
+        h3 {
+          margin-bottom: $gutter-thin-h;
+        }
+
+        span {
+          font-family: 'Font italic';
+        }
+      }
+
+      .front-side {
+        position: absolute;
+        backface-visibility: hidden;
+        h3 {
+          position: absolute;
+          bottom: 0;
+        }
+      }
+
+      &.flipped {
+        transform: rotateY(180deg);
+      }
+
+      .quote {
+        font-family: 'Font Italic';
+        padding: $gutter-h;
+      }
+
+      .footnotes {
+        border-top: 1px solid $color;
+        margin-top: $gutter-thin-h;
+      }
+    }
+
+    // General styling for the container
+    img {
+      // position: absolute;
+      // display: none;
+      object-fit: contain;
+      z-index: -9999;
+      max-width: 100%;
+      max-height: 100%;
+      height: 100%;
+      width: 100%;
+      // background-color: $background-color;
+      background-image: url(../images/Main.jpg);
+      background-size: auto 100%;
+    }
+
+    h3 {
+      font-size: $font-size * 1.5;
+      line-height: $line-height * 0.9;
+      width: 100%;
+      background-color: $background-color;
+    }
+
+    ol {
+      font-size: $font-size * 0.8;
+      list-style-position: inside;
+      list-style-type: decimal;
+    }
+
+    sup {
+      vertical-align: super;
+      font-size: smaller;
+    }
+
+    p {
+      text-indent: $indent;
+    }
+
+    p:first-of-type,
+    .quote + p,
+    br + p,
+    p + .quote,
+    .list + p {
+      text-indent: 0;
+    }
+  }
+}
