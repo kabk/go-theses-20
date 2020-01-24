@@ -129,6 +129,11 @@ a:focus {
           flex-direction: column;
 }
 
+.wrapper .container #names,
+.wrapper .container #info {
+  display: none;
+}
+
 .wrapper .container .object {
   position: relative;
   height: auto;

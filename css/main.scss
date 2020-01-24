@@ -139,6 +139,11 @@ a:focus {
     display: flex;
     flex-direction: column;
 
+    #names,
+    #info {
+      display: none;
+    }
+
     .object {
       position: relative;
       height: auto;

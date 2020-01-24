@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', ready);
 function ready() {
-  automaticScroll();
+  // automaticScroll();
   flipImages();
+  openOtherPages();
 }
 
 let stopScrolling;
@@ -52,6 +53,26 @@ function flipImages() {
     object.addEventListener('click', e => {
       object.classList.toggle('flipped');
       stopScrolling = !stopScrolling;
+    });
+  });
+}
+
+function openOtherPages() {
+  let links = document.querySelectorAll('nav.menu > ul > li > a');
+  let objects = document.getElementById('objects');
+
+  links.forEach(link => {
+    link.addEventListener('click', e => {
+      let link_id = link.id;
+      let link_container = document.querySelector(`div > #${link_id}`);
+
+      if (link_container.style.display == 'none') {
+        link_container.style.display = 'block';
+        objects.style.display = 'none';
+      } else {
+        link_container.style.display = 'none';
+        objects.style.display = '';
+      }
     });
   });
 }
