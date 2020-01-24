@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', ready);
 function ready() {
-  // automaticScroll();
+  automaticScroll();
   flipImages();
   openOtherPages();
 }
