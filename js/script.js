@@ -13,7 +13,7 @@ function openContent() {
   links.forEach(link => {
     link.addEventListener('click', e => {
       let content = e.target.querySelector('.person-thesis-content');
-      console.log(e);
+      // console.log(e);
 
       if (content.style.display == 'block') {
         allContent.forEach(content => {
