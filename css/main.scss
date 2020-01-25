@@ -20,10 +20,10 @@ www.nedkamburov.com
 }
 
 @font-face {
-  font-family: 'Font Italic';
-  src: url(../fonts/NeueHaasUnicaW1G-Italic.woff2) format('woff2'),
-    url(../fonts/NeueHaasUnicaW1G-Italic.woff) format('woff'),
-    url(../fonts/NeueHaasUnicaW1G-Italic.ttf) format('truetype');
+  font-family: 'Font Bold';
+  src: url(../fonts/NeueHaasUnicaW1G-Bold.woff2) format('woff2'),
+    url(../fonts/NeueHaasUnicaW1G-Bold.woff) format('woff'),
+    url(../fonts/NeueHaasUnicaW1G-Bold.ttf) format('truetype');
 }
 
 // Variables
@@ -34,11 +34,11 @@ $link-color: blue;
 
 $font-size: 2rem;
 $line-height: 1.3;
-$font-size-title: $font-size * 2;
+$font-size-title: $font-size * 1.5;
 $line-height-title: 1.1;
 
-$gutter-v: $font-size * $line-height * 1.4;
-$gutter-h: $font-size * $line-height * 1.5;
+$gutter-v: $font-size * $line-height * 1.1;
+$gutter-h: $font-size * $line-height * 1;
 $gutter-thin-h: $gutter-h * 0.5;
 $indent: $gutter-v;
 
@@ -49,13 +49,18 @@ $easing: ease-in-out;
 html {
   width: 100%;
 
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
+
   //TODO: Responsiveness
   @media screen and (min-width: 0), (min-height: 0px) {
     font-size: 10px;
   }
 
   @media screen and (min-width: 200px) and (min-height: 200px) {
-    font-size: 7px;
+    font-size: 8px;
   }
 
   @media screen and (min-width: 400px) and (min-height: 400px) {
@@ -104,153 +109,181 @@ a:focus {
 }
 
 .wrapper {
-  padding: 0 $gutter-v;
-  margin: auto;
-  left: 0;
-  right: 0;
+  padding-left: 1px;
+  padding-right: 1px;
 
-  @media screen {
-    max-width: 900px;
-  }
-
-  .menu {
+  nav {
     position: fixed;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
     z-index: 9999;
 
-    .chapters-list {
-      li {
-        display: inline-block;
-        margin-right: 1em; //TODO: set
-        &:last-child {
-          margin-right: 0;
-        }
-      }
-    }
+    // background-color: rgba(255, 255, 255, 0.6);
 
     h1 {
+      display: inline-block;
       font-size: $font-size-title;
       line-height: $line-height-title;
+    }
+
+    #theses-info {
+      margin-right: 5px;
+
+      &.selected {
+        text-decoration: underline;
+      }
     }
   }
 
   .container {
-    padding-top: 10em;
+    padding-top: $font-size-title * $line-height-title * 3;
     width: 100%;
-    display: flex;
-    flex-direction: column;
 
-    #names,
-    #info {
-      display: none;
+    @media screen and (min-width: 540px) and (min-height: 540px) {
+      padding-top: $font-size-title * $line-height-title * 2;
     }
 
-    .object {
-      position: relative;
-      height: auto;
-      // flex: 1 2 1;
+    .person {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: space-between;
 
-      perspective: 1000px;
-      transform-style: preserve-3d;
-      transition: transform $duration;
-      margin-bottom: $gutter-h;
+      @media screen and (min-width: 1000px) and (min-height: 1000px) {
+        flex-direction: row;
+      }
 
-      .side {
-        // position: absolute;
-        height: 50vw;
+      .person-name {
+        font-family: 'Font Bold';
+      }
+      .person-name,
+      .person-thesis {
+        display: inline-block;
+        pointer-events: none;
+      }
+
+      &:hover {
+        cursor: pointer;
+        border-bottom: 2px solid $color;
+      }
+
+      // &:hover .person-name,
+      // &:hover .person-thesis {
+      //   text-decoration: underline;
+      // }
+
+      .person-thesis-content {
+        display: none;
+        position: fixed;
         width: 100%;
-        max-height: 50vh;
-        top: 0;
-        left: 0;
-        transform-style: preserve-3d;
+        height: 50vh;
+        bottom: 0;
+        border-top: 1px solid $color;
+
+        @media screen and (min-width: 1000px) and (min-height: 1000px) {
+          width: 50%;
+          height: 100vh;
+          right: 0;
+          top: 0;
+          border: none;
+
+          border-left: 1px solid $color;
+        }
+
+        z-index: 9998;
+        background-color: $background-color;
+        overflow-y: scroll;
 
         ::-webkit-scrollbar {
           display: none;
         }
-
         scrollbar-width: none;
-      }
-      .back-side {
-        transform: rotateY(180deg);
-        width: 100%;
-        backface-visibility: hidden;
-        overflow-y: scroll;
 
-        h3 {
-          margin-bottom: $gutter-thin-h;
+        .person-thesis-image {
+          width: 100%;
         }
 
-        span {
-          font-family: 'Font italic';
+        .person-thesis-text {
+          padding: $gutter-thin-h / 2 $gutter-v / 2;
+
+          h3 {
+            font-family: 'Font Bold';
+            margin-bottom: $gutter-thin-h;
+          }
+
+          .footnotes {
+            margin: $gutter-thin-h;
+            border-top: 1px solid $color;
+          }
+
+          a {
+            font-family: 'Font Bold';
+          }
         }
-      }
-
-      .front-side {
-        position: absolute;
-        backface-visibility: hidden;
-        h3 {
-          position: absolute;
-          bottom: 0;
-        }
-      }
-
-      &.flipped {
-        transform: rotateY(180deg);
-      }
-
-      .quote {
-        font-family: 'Font Italic';
-        padding: $gutter-h;
-      }
-
-      .footnotes {
-        border-top: 1px solid $color;
-        margin-top: $gutter-thin-h;
       }
     }
 
-    // General styling for the container
-    img {
-      // position: absolute;
-      // display: none;
-      object-fit: contain;
-      z-index: -9999;
-      max-width: 100%;
-      max-height: 100%;
-      height: 100%;
-      width: 100%;
-      // background-color: $background-color;
-      background-image: url(../images/Main.jpg);
-      background-size: auto 100%;
-    }
+    #theses-info-content {
+      display: none;
+      position: fixed;
 
-    h3 {
-      font-size: $font-size * 1.5;
-      line-height: $line-height * 0.9;
       width: 100%;
+      height: 50vh;
+      bottom: 0;
       background-color: $background-color;
-    }
+      border-top: 1px solid $color;
 
-    ol {
-      font-size: $font-size * 0.8;
-      list-style-position: inside;
-      list-style-type: decimal;
-    }
+      @media screen and (min-width: 1000px) and (min-height: 1000px) {
+        padding-top: $font-size-title * $line-height-title * 2;
+        top: 0;
+        width: 50%;
+        height: 100%;
+        border: none;
+        border-right: 1px solid $color;
+      }
 
-    sup {
-      vertical-align: super;
-      font-size: smaller;
-    }
-
-    p {
-      text-indent: $indent;
-    }
-
-    p:first-of-type,
-    .quote + p,
-    br + p,
-    p + .quote,
-    .list + p {
-      text-indent: 0;
+      &.visible {
+        display: block;
+      }
     }
   }
+}
+
+// General styling for the container
+img {
+  object-fit: contain;
+  width: 100%;
+  background-image: url(../images/object16-Pepijn-De-Jonge_----------.jpg);
+  background-size: auto 100%;
+}
+
+//     h3 {
+//       font-size: $font-size * 1.5;
+//       line-height: $line-height * 0.9;
+//       width: 100%;
+//       background-color: $background-color;
+//     }
+
+ol {
+  font-size: $font-size * 0.8;
+  list-style-position: inside;
+  list-style-type: decimal;
+}
+
+sup {
+  vertical-align: super;
+  font-size: smaller;
+}
+
+p {
+  text-indent: $indent;
+}
+
+p:first-of-type,
+.quote + p,
+br + p,
+p + .quote,
+.list + p {
+  text-indent: 0;
 }

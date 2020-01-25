@@ -12,12 +12,17 @@ www.nedkamburov.com
 }
 
 @font-face {
-  font-family: 'Font Italic';
-  src: url(../fonts/NeueHaasUnicaW1G-Italic.woff2) format("woff2"), url(../fonts/NeueHaasUnicaW1G-Italic.woff) format("woff"), url(../fonts/NeueHaasUnicaW1G-Italic.ttf) format("truetype");
+  font-family: 'Font Bold';
+  src: url(../fonts/NeueHaasUnicaW1G-Bold.woff2) format("woff2"), url(../fonts/NeueHaasUnicaW1G-Bold.woff) format("woff"), url(../fonts/NeueHaasUnicaW1G-Bold.ttf) format("truetype");
 }
 
 html {
   width: 100%;
+  scrollbar-width: none;
+}
+
+html ::-webkit-scrollbar {
+  display: none;
 }
 
 @media screen and (min-width: 0), (min-height: 0px) {
@@ -28,7 +33,7 @@ html {
 
 @media screen and (min-width: 200px) and (min-height: 200px) {
   html {
-    font-size: 7px;
+    font-size: 8px;
   }
 }
 
@@ -86,164 +91,188 @@ a:focus {
 }
 
 .wrapper {
-  padding: 0 3.64rem;
-  margin: auto;
-  left: 0;
-  right: 0;
+  padding-left: 1px;
+  padding-right: 1px;
 }
 
-@media screen {
-  .wrapper {
-    max-width: 900px;
-  }
-}
-
-.wrapper .menu {
+.wrapper nav {
   position: fixed;
-  z-index: 9999;
-}
-
-.wrapper .menu .chapters-list li {
-  display: inline-block;
-  margin-right: 1em;
-}
-
-.wrapper .menu .chapters-list li:last-child {
-  margin-right: 0;
-}
-
-.wrapper .menu h1 {
-  font-size: 4rem;
-  line-height: 1.1;
-}
-
-.wrapper .container {
-  padding-top: 10em;
-  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  z-index: 9999;
+}
+
+.wrapper nav h1 {
+  display: inline-block;
+  font-size: 3rem;
+  line-height: 1.1;
+}
+
+.wrapper nav #theses-info {
+  margin-right: 5px;
+}
+
+.wrapper nav #theses-info.selected {
+  text-decoration: underline;
+}
+
+.wrapper .container {
+  padding-top: 9.9rem;
+  width: 100%;
+}
+
+@media screen and (min-width: 540px) and (min-height: 540px) {
+  .wrapper .container {
+    padding-top: 6.6rem;
+  }
+}
+
+.wrapper .container .person {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
-.wrapper .container #names,
-.wrapper .container #info {
+@media screen and (min-width: 1000px) and (min-height: 1000px) {
+  .wrapper .container .person {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+}
+
+.wrapper .container .person .person-name {
+  font-family: 'Font Bold';
+}
+
+.wrapper .container .person .person-name,
+.wrapper .container .person .person-thesis {
+  display: inline-block;
+  pointer-events: none;
+}
+
+.wrapper .container .person:hover {
+  cursor: pointer;
+  border-bottom: 2px solid #000;
+}
+
+.wrapper .container .person .person-thesis-content {
   display: none;
-}
-
-.wrapper .container .object {
-  position: relative;
-  height: auto;
-  -webkit-perspective: 1000px;
-          perspective: 1000px;
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
-  -webkit-transition: -webkit-transform 0.8s;
-  transition: -webkit-transform 0.8s;
-  transition: transform 0.8s;
-  transition: transform 0.8s, -webkit-transform 0.8s;
-  margin-bottom: 3.9rem;
-}
-
-.wrapper .container .object .side {
-  height: 50vw;
+  position: fixed;
   width: 100%;
-  max-height: 50vh;
-  top: 0;
-  left: 0;
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
+  height: 50vh;
+  bottom: 0;
+  border-top: 1px solid #000;
+  z-index: 9998;
+  background-color: #fafafa;
+  overflow-y: scroll;
   scrollbar-width: none;
 }
 
-.wrapper .container .object .side ::-webkit-scrollbar {
+@media screen and (min-width: 1000px) and (min-height: 1000px) {
+  .wrapper .container .person .person-thesis-content {
+    width: 50%;
+    height: 100vh;
+    right: 0;
+    top: 0;
+    border: none;
+    border-left: 1px solid #000;
+  }
+}
+
+.wrapper .container .person .person-thesis-content ::-webkit-scrollbar {
   display: none;
 }
 
-.wrapper .container .object .back-side {
-  -webkit-transform: rotateY(180deg);
-          transform: rotateY(180deg);
+.wrapper .container .person .person-thesis-content .person-thesis-image {
   width: 100%;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-  overflow-y: scroll;
 }
 
-.wrapper .container .object .back-side h3 {
-  margin-bottom: 1.95rem;
+.wrapper .container .person .person-thesis-content .person-thesis-text {
+  padding: 0.65rem 1.43rem;
 }
 
-.wrapper .container .object .back-side span {
-  font-family: 'Font italic';
+.wrapper .container .person .person-thesis-content .person-thesis-text h3 {
+  font-family: 'Font Bold';
+  margin-bottom: 1.3rem;
 }
 
-.wrapper .container .object .front-side {
-  position: absolute;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-}
-
-.wrapper .container .object .front-side h3 {
-  position: absolute;
-  bottom: 0;
-}
-
-.wrapper .container .object.flipped {
-  -webkit-transform: rotateY(180deg);
-          transform: rotateY(180deg);
-}
-
-.wrapper .container .object .quote {
-  font-family: 'Font Italic';
-  padding: 3.9rem;
-}
-
-.wrapper .container .object .footnotes {
+.wrapper .container .person .person-thesis-content .person-thesis-text .footnotes {
+  margin: 1.3rem;
   border-top: 1px solid #000;
-  margin-top: 1.95rem;
 }
 
-.wrapper .container img {
+.wrapper .container .person .person-thesis-content .person-thesis-text a {
+  font-family: 'Font Bold';
+}
+
+.wrapper .container #theses-info-content {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 50vh;
+  bottom: 0;
+  background-color: #fafafa;
+  border-top: 1px solid #000;
+}
+
+@media screen and (min-width: 1000px) and (min-height: 1000px) {
+  .wrapper .container #theses-info-content {
+    padding-top: 6.6rem;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    border: none;
+    border-right: 1px solid #000;
+  }
+}
+
+.wrapper .container #theses-info-content.visible {
+  display: block;
+}
+
+img {
   -o-object-fit: contain;
      object-fit: contain;
-  z-index: -9999;
-  max-width: 100%;
-  max-height: 100%;
-  height: 100%;
   width: 100%;
-  background-image: url(../images/Main.jpg);
+  background-image: url(../images/object16-Pepijn-De-Jonge_----------.jpg);
   background-size: auto 100%;
 }
 
-.wrapper .container h3 {
-  font-size: 3rem;
-  line-height: 1.17;
-  width: 100%;
-  background-color: #fafafa;
-}
-
-.wrapper .container ol {
+ol {
   font-size: 1.6rem;
   list-style-position: inside;
   list-style-type: decimal;
 }
 
-.wrapper .container sup {
+sup {
   vertical-align: super;
   font-size: smaller;
 }
 
-.wrapper .container p {
-  text-indent: 3.64rem;
+p {
+  text-indent: 2.86rem;
 }
 
-.wrapper .container p:first-of-type,
-.wrapper .container .quote + p,
-.wrapper .container br + p,
-.wrapper .container p + .quote,
-.wrapper .container .list + p {
+p:first-of-type,
+.quote + p,
+br + p,
+p + .quote,
+.list + p {
   text-indent: 0;
 }
