@@ -27,31 +27,31 @@ html ::-webkit-scrollbar {
 
 @media screen and (min-width: 0), (min-height: 0px) {
   html {
-    font-size: 10px;
+    font-size: 8px;
   }
 }
 
 @media screen and (min-width: 200px) {
   html {
-    font-size: 8px;
+    font-size: 10px;
   }
 }
 
 @media screen and (min-width: 400px) {
   html {
-    font-size: 9px;
+    font-size: 12px;
   }
 }
 
 @media screen and (min-width: 500px) {
   html {
-    font-size: 10px;
+    font-size: 13px;
   }
 }
 
 @media screen and (min-width: 800px) {
   html {
-    font-size: 12px;
+    font-size: 14px;
   }
 }
 
@@ -104,7 +104,6 @@ a:focus {
       -ms-flex-pack: justify;
           justify-content: space-between;
   width: 100%;
-  z-index: 9999;
 }
 
 .wrapper nav img {
