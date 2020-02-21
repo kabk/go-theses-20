@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', ready);
 function ready() {
-  openContent();
   openInfo();
+  openContent();
 }
 
 function openContent() {
@@ -34,9 +34,18 @@ function openContent() {
 
 function openInfo() {
   const infoBtn = document.getElementById('theses-info');
+  const xBtn = document.getElementById('theses-info-x-button');
+  const infoContent = document.getElementById('theses-info-content');
+  const allContent = document.querySelectorAll('.person-thesis-content');
+
+  xBtn.addEventListener('click', () => {
+    infoContent.classList.toggle('visible');
+  });
 
   infoBtn.addEventListener('click', e => {
-    let infoContent = document.getElementById('theses-info-content');
+    allContent.forEach(content => {
+      content.style.display = 'none';
+    });
     infoContent.classList.toggle('visible');
     infoBtn.classList.toggle('selected');
   });
