@@ -28,7 +28,8 @@ www.nedkamburov.com
 
 // Variables
 // --------------------------------
-$background-color: rgb(250, 250, 250);
+$background-color: rgb(211, 211, 211);
+$background-info-color: #fff;
 $color: #000;
 $link-color: blue;
 
@@ -42,7 +43,7 @@ $gutter-h: $font-size * $line-height * 1;
 $gutter-thin-h: $gutter-h * 0.5;
 $indent: $gutter-v;
 
-$duration: 0.8s;
+$duration: 0.4s;
 // $easing: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 $easing: ease-in-out;
 
@@ -59,24 +60,24 @@ html {
     font-size: 10px;
   }
 
-  @media screen and (min-width: 200px) and (min-height: 200px) {
+  @media screen and (min-width: 200px) {
     font-size: 8px;
   }
 
-  @media screen and (min-width: 400px) and (min-height: 400px) {
+  @media screen and (min-width: 400px) {
     font-size: 9px;
   }
 
-  @media screen and (min-width: 500px) and (min-height: 500px) {
+  @media screen and (min-width: 500px) {
     font-size: 10px;
   }
 
-  @media screen and (min-width: 800px) and (min-height: 800px) {
+  @media screen and (min-width: 800px) {
     font-size: 12px;
   }
 
-  @media screen and (min-width: 1000px) and (min-height: 1000px) {
-    font-size: 12px;
+  @media screen and (min-width: 900px) {
+    font-size: 10px;
   }
 }
 
@@ -109,8 +110,8 @@ a:focus {
 }
 
 .wrapper {
-  padding-left: 1px;
-  padding-right: 1px;
+  padding-left: $gutter-thin-h;
+  padding-right: $gutter-thin-h;
 
   nav {
     position: fixed;
@@ -119,7 +120,13 @@ a:focus {
     width: 100%;
     z-index: 9999;
 
-    // background-color: rgba(255, 255, 255, 0.6);
+    img {
+      display: inline-block;
+      position: relative;
+      top: 0.2em;
+      height: 1em;
+      background-image: none;
+    }
 
     h1 {
       display: inline-block;
@@ -128,10 +135,11 @@ a:focus {
     }
 
     #theses-info {
-      margin-right: 5px;
+      margin-right: $gutter-thin-h * 2;
+      text-decoration: underline;
 
-      &.selected {
-        text-decoration: underline;
+      &:hover {
+        text-transform: uppercase;
       }
     }
   }
@@ -140,7 +148,7 @@ a:focus {
     padding-top: $font-size-title * $line-height-title * 3;
     width: 100%;
 
-    @media screen and (min-width: 540px) and (min-height: 540px) {
+    @media screen and (min-width: 540px) {
       padding-top: $font-size-title * $line-height-title * 2;
     }
 
@@ -149,14 +157,13 @@ a:focus {
       flex-wrap: wrap;
       flex-direction: column;
       justify-content: space-between;
+      padding-top: $gutter-thin-h * 0.5;
 
-      @media screen and (min-width: 1000px) and (min-height: 1000px) {
+      @media screen and (min-width: 900px) {
         flex-direction: row;
+        padding-top: 0;
       }
 
-      .person-name {
-        font-family: 'Font Bold';
-      }
       .person-name,
       .person-thesis {
         display: inline-block;
@@ -176,24 +183,39 @@ a:focus {
       .person-thesis-content {
         display: none;
         position: fixed;
-        width: 100%;
-        height: 50vh;
+
+        width: 90vw;
+        height: 90vh;
+        margin: auto;
+        top: 0;
+        right: 0;
         bottom: 0;
-        border-top: 1px solid $color;
+        left: 0;
 
-        @media screen and (min-width: 1000px) and (min-height: 1000px) {
-          width: 50%;
-          height: 100vh;
-          right: 0;
-          top: 0;
-          border: none;
-
-          border-left: 1px solid $color;
+        @media screen and (min-width: 900px) {
+          width: 140vh;
+          height: 75vh;
+          max-height: 90vh;
         }
 
-        z-index: 9998;
-        background-color: $background-color;
-        overflow-y: scroll;
+        overflow: scroll;
+
+        background-color: $background-info-color;
+        border: 1px solid $color;
+
+        // @media screen and (min-width: 900px) and (min-height: 900px) {
+        //   width: 50%;
+        //   height: 100vh;
+        //   right: 0;
+        //   top: 0;
+        //   border: none;
+
+        //   border-left: 1px solid $color;
+        // }
+
+        // z-index: 9998;
+        // background-color: $background-color;
+        // overflow-y: scroll;
 
         ::-webkit-scrollbar {
           display: none;
@@ -201,10 +223,67 @@ a:focus {
         scrollbar-width: none;
 
         .person-thesis-image {
+          position: relative;
           width: 100%;
+          max-height: 100%;
+
+          @media screen and (min-width: 900px) {
+            position: sticky;
+            top: 0;
+            height: 100%;
+          }
+
+          .x-button {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2em;
+            height: 2em;
+            z-index: 9999;
+
+            background-color: $background-info-color;
+            -webkit-mask-image: url(../images/cross.svg);
+            mask-image: url(../images/cross.svg);
+            transition: transform $duration ease-in-out;
+          }
+
+          .x-button:hover {
+            transform: scale(0.85);
+          }
+
+          .website-link {
+            width: 2em;
+            height: 2em;
+
+            position: absolute;
+            top: 0;
+            left: 2em;
+
+            background-color: $background-info-color;
+            -webkit-mask-image: url(../images/link3.svg);
+            mask-image: url(../images/link3.svg);
+            transition: transform $duration ease-in-out;
+
+            a {
+              width: inherit;
+              height: inherit;
+              display: inline-block;
+            }
+          }
+
+          .website-link:hover {
+            transform: scale(0.85);
+          }
         }
 
         .person-thesis-text {
+          @media screen and (min-width: 900px) {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 25%;
+          }
+
           padding: $gutter-thin-h / 2 $gutter-v / 2;
 
           h3 {
@@ -216,10 +295,6 @@ a:focus {
             margin: $gutter-thin-h;
             border-top: 1px solid $color;
           }
-
-          a {
-            font-family: 'Font Bold';
-          }
         }
       }
     }
@@ -228,24 +303,24 @@ a:focus {
       display: none;
       position: fixed;
 
-      width: 100%;
-      height: 50vh;
-      bottom: 0;
-      background-color: $background-color;
-      border-top: 1px solid $color;
+      //   // width: 100%;
+      //   // height: 50vh;
+      //   bottom: 0;
+      //   background-color: $background-color;
+      //   border-top: 1px solid $color;
 
-      @media screen and (min-width: 1000px) and (min-height: 1000px) {
-        padding-top: $font-size-title * $line-height-title * 2;
-        top: 0;
-        width: 50%;
-        height: 100%;
-        border: none;
-        border-right: 1px solid $color;
-      }
+      //   @media screen and (min-width: 900px) and (min-height: 900px) {
+      //     padding-top: $font-size-title * $line-height-title * 2;
+      //     top: 0;
+      //     width: 50%;
+      //     height: 100%;
+      //     border: none;
+      //     border-right: 1px solid $color;
+      //   }
 
-      &.visible {
-        display: block;
-      }
+      //   &.visible {
+      //     display: block;
+      //   }
     }
   }
 }
@@ -253,9 +328,21 @@ a:focus {
 // General styling for the container
 img {
   object-fit: contain;
-  width: 100%;
+
+  max-width: 100%;
+  max-height: 100%;
+
+  // @media screen and (min-width: 1000px) {
+  //   max-height: 100%;
+  //   // max-width: 50%;
+  // }
+
   background-image: url(../images/object16-Pepijn-De-Jonge_----------.jpg);
   background-size: auto 100%;
+}
+
+footer {
+  padding-top: $gutter-h;
 }
 
 //     h3 {

@@ -2,8 +2,6 @@ document.addEventListener('DOMContentLoaded', ready);
 function ready() {
   openContent();
   openInfo();
-  // flipImages();
-  // openOtherPages();
 }
 
 function openContent() {
@@ -11,9 +9,14 @@ function openContent() {
   const allContent = document.querySelectorAll('.person-thesis-content');
 
   links.forEach(link => {
+    const xBtn = link.querySelector('.x-button');
+    xBtn.addEventListener('click', () => {
+      allContent.forEach(content => {
+        content.style.display = 'none';
+      });
+    });
     link.addEventListener('click', e => {
       let content = e.target.querySelector('.person-thesis-content');
-      // console.log(e);
 
       if (content.style.display == 'block') {
         allContent.forEach(content => {
